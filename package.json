@@ -1,14 +1,14 @@
 {
-  "name": "ioserver-mongodb-sync",
-  "version": "1.2.0",
+  "name": "ioserver-mongodb",
+  "version": "1.0.0",
   "description": "MongoDB sync connector ready to be used with Fibers",
-  "main": "build/index.js",
+  "main": "ioserver-mongodb.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/x42en/ioserver-mongodb-sync.git"
+    "url": "https://github.com/x42en/ioserver-mongodb.git"
   },
   "keywords": [
     "ioserver",
@@ -18,9 +18,9 @@
   "author": "Ben Mz <0x42en@gmail.com> (https://github.com/x42en)",
   "license": "GPL-2.0",
   "bugs": {
-    "url": "https://github.com/x42en/ioserver-mongodb-sync/issues"
+    "url": "https://github.com/x42en/ioserver-mongodb/issues"
   },
-  "homepage": "https://github.com/x42en/ioserver-mongodb-sync#readme",
+  "homepage": "https://github.com/x42en/ioserver-mongodb#readme",
   "dependencies": {
     "fibers": "^1.0.15",
     "mongo-sync": "^2.0.1"
