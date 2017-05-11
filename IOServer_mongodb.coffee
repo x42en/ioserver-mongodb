@@ -18,9 +18,7 @@ Mongo = require 'mongo-sync'
 Fiber = require 'fibers'
 
 # Compile file using:
-# coffee -w --no-header -c DBConnector.coffee
-# Run using:
-# ./bin.main.js
+# coffee -w --no-header -c *.coffee
 module.exports = class IOServer_Mongodb
     constructor: ({host,port,user,pwd,db,authMethod}={}) ->
         host = host || '127.0.0.1'

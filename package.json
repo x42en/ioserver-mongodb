@@ -1,8 +1,8 @@
 {
   "name": "ioserver-mongodb",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "MongoDB sync connector ready to be used with Fibers",
-  "main": "ioserver-mongodb.js",
+  "main": "IOServer_mongodb.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
