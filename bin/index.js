@@ -1,5 +1,5 @@
 /****************************************************/
-/*        IOServer-mongodb-sync - v1.0.0            */
+/*        IOServer-mongodb-sync - v1.1.0            */
 /*                                                  */
 /*    Connect to your MongoDB using FIbers          */
 /****************************************************/

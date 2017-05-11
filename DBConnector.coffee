@@ -18,7 +18,7 @@ Mongo = require 'mongo-sync'
 Fiber = require 'fibers'
 
 # Compile file using:
-# coffee -o bin/ -w --bare --no-header -c src/*.coffee
+# coffee -o bin/index.js -w --bare --no-header -c DBConnector.coffee
 # Run using:
 # ./bin.main.js
 module.exports = class DBConnector
