@@ -52,11 +52,11 @@
       }
     }
 
-    IOserver_Mongodb.prototype._close = function() {
+    IOServer_Mongodb.prototype._close = function() {
       return this._server.close();
     };
 
-    IOserver_Mongodb.prototype.collection = function(name) {
+    IOServer_Mongodb.prototype.collection = function(name) {
       return this._database.getCollection(name);
     };
 
