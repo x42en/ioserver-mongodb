@@ -1,5 +1,5 @@
 /****************************************************/
-/*           IOServer-mongodb - v1.3.0              */
+/*           IOServer-mongodb - v1.4.0              */
 /*                                                  */
 /*    Connect to your MongoDB using FIbers          */
 /****************************************************/
@@ -18,9 +18,7 @@
   Fiber = require('fibers');
 
   module.exports = IOServer_Mongodb = (function() {
-    function IOServer_Mongodb() {}
-
-    IOServer_Mongodb.prototype.connect = function(arg) {
+    function IOServer_Mongodb(arg) {
       var authMethod, db, e, error, error1, host, port, pwd, ref, user;
       ref = arg != null ? arg : {}, host = ref.host, port = ref.port, user = ref.user, pwd = ref.pwd, db = ref.db, authMethod = ref.authMethod;
       host = host || '127.0.0.1';
@@ -38,7 +36,7 @@
       authMethod = authMethod || 'SCRAM-SHA-1';
       try {
         this._server = new Mongo.Server(host + ":" + port);
-        return Fiber((function(_this) {
+        Fiber((function(_this) {
           return function() {
             _this._database = _this._server.db(db);
             if (user && pwd) {
@@ -52,7 +50,7 @@
         e = error1;
         throw e;
       }
-    };
+    }
 
     IOServer_Mongodb.prototype._close = function() {
       return this._server.close();

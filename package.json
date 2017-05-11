@@ -1,6 +1,6 @@
 {
   "name": "ioserver-mongodb",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "MongoDB sync connector ready to be used with Fibers",
   "main": "IOServer_mongodb.js",
   "scripts": {

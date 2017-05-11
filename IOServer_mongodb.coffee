@@ -20,8 +20,7 @@ Fiber = require 'fibers'
 # Compile file using:
 # coffee -w --no-header -c *.coffee
 module.exports = class IOServer_Mongodb
-    constructor: ->
-    connect: ({host,port,user,pwd,db,authMethod}={}) ->
+    constructor: ({host,port,user,pwd,db,authMethod}={}) ->
         host = host || '127.0.0.1'
         try
             port = Number(port) || 27017
