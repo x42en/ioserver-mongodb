@@ -25,10 +25,10 @@ module.exports = class IOServer_Mongodb
         try
             port = Number(port) || 27017
         catch e
-            throw 'Invalid port.'
+            throw new Error('Invalid port.')
         
         unless db
-            throw 'Database not set.'
+            throw new Error('Database not set.')
         
         options = {}
         options.user = user || false
@@ -46,7 +46,7 @@ module.exports = class IOServer_Mongodb
 
             ).run()
         catch e
-            throw e
+            throw new Error(e.stack)
     
     _close: -> @_server.close()
 

@@ -26,10 +26,10 @@
         port = Number(port) || 27017;
       } catch (error) {
         e = error;
-        throw 'Invalid port.';
+        throw new Error('Invalid port.');
       }
       if (!db) {
-        throw 'Database not set.';
+        throw new Error('Database not set.');
       }
       options = {};
       options.user = user || false;
@@ -46,7 +46,7 @@
         })(this)).run();
       } catch (error1) {
         e = error1;
-        throw e;
+        throw new Error(e.stack);
       }
     }
 
