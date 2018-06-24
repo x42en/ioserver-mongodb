@@ -1,4 +1,4 @@
-# Copyright [2017] 
+# Copyright [2018] 
 # @Email: x42en (at) users (dot) noreply (dot) github (dot) com
 # @Author: Ben Mz
 
@@ -20,7 +20,7 @@ Fiber = require 'fibers'
 # Compile file using:
 # coffee -w --no-header -c *.coffee
 module.exports = class IOServer_Mongodb
-    constructor: ({host,port,user,pwd,db,authMethod}={}) ->
+    constructor: ({host,port,user,pwd,db,authMethod,authSource}={}) ->
         host = host || '127.0.0.1'
         try
             port = Number(port) || 27017
@@ -30,17 +30,20 @@ module.exports = class IOServer_Mongodb
         unless db
             throw 'Database not set.'
         
-        user = user || false
-        pwd = pwd || false
-        authMethod = authMethod || 'SCRAM-SHA-1'
+        options = {}
+        options.user = user || false
+        options.password = pwd || false
+        options.authMethod = authMethod || 'SCRAM-SHA-1'
+        options.authSource = authSource || 'admin'
 
         try
             @_server = new Mongo.Server "#{host}:#{port}"
+            @_client = new Mongo.Client @_server, options
 
             Fiber(=>
-                @_database = @_server.db db
-                if user and pwd
-                    @_database.auth user, pwd, {authMechanism: authMethod}
+                
+                @_database = @_client.connect "mongodb://#{host}:#{port}/#{db}"
+
             ).run()
         catch e
             throw e

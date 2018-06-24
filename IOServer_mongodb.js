@@ -1,13 +1,13 @@
 /****************************************************/
-/*           IOServer-mongodb - v1.4.0              */
+/*           IOServer-mongodb - v2.1.0              */
 /*                                                  */
 /*    Connect to your MongoDB using FIbers          */
 /****************************************************/
-/*             -    Copyright 2017    -             */
+/*             -    Copyright 2018    -             */
 /*                                                  */
 /*   License: Apache v 2.0                          */
 /*   @Author: Ben Mz                                */
-/*   @Email: benoit (at) webboards (dot) fr         */
+/*   @Email: benoit (at) prohacktive (dot) io       */
 /*                                                  */
 /****************************************************/
 (function() {
@@ -19,8 +19,8 @@
 
   module.exports = IOServer_Mongodb = (function() {
     function IOServer_Mongodb(arg) {
-      var authMethod, db, e, error, error1, host, port, pwd, ref, user;
-      ref = arg != null ? arg : {}, host = ref.host, port = ref.port, user = ref.user, pwd = ref.pwd, db = ref.db, authMethod = ref.authMethod;
+      var authMethod, authSource, db, e, error, error1, host, options, port, pwd, ref, user;
+      ref = arg != null ? arg : {}, host = ref.host, port = ref.port, user = ref.user, pwd = ref.pwd, db = ref.db, authMethod = ref.authMethod, authSource = ref.authSource;
       host = host || '127.0.0.1';
       try {
         port = Number(port) || 27017;
@@ -31,19 +31,17 @@
       if (!db) {
         throw 'Database not set.';
       }
-      user = user || false;
-      pwd = pwd || false;
-      authMethod = authMethod || 'SCRAM-SHA-1';
+      options = {};
+      options.user = user || false;
+      options.password = pwd || false;
+      options.authMethod = authMethod || 'SCRAM-SHA-1';
+      options.authSource = authSource || 'admin';
       try {
         this._server = new Mongo.Server(host + ":" + port);
+        this._client = new Mongo.Client(this._server, options);
         Fiber((function(_this) {
           return function() {
-            _this._database = _this._server.db(db);
-            if (user && pwd) {
-              return _this._database.auth(user, pwd, {
-                authMechanism: authMethod
-              });
-            }
+            return _this._database = _this._client.connect("mongodb://" + host + ":" + port + "/" + db);
           };
         })(this)).run();
       } catch (error1) {
